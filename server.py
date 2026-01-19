@@ -125,7 +125,7 @@ def search_games(
     """
     params.append(limit)
     
-    return execute_query(sql, tuple(params))
+    return {"games": execute_query(sql, tuple(params))}
 
 
 @mcp.tool
@@ -195,7 +195,7 @@ def get_price_trend_by_year() -> list[dict]:
         GROUP BY release_year
         ORDER BY release_year
     """
-    return execute_query(sql)
+    return {"yearly_trends": execute_query(sql)}
 
 
 @mcp.tool
@@ -224,7 +224,7 @@ def get_genre_statistics(top_n: int = 15) -> list[dict]:
         ORDER BY game_count DESC
         LIMIT %s
     """
-    return execute_query(sql, (top_n,))
+    return {"genres": execute_query(sql, (top_n,))}
 
 
 @mcp.tool
@@ -251,7 +251,7 @@ def get_genre_playtime_analysis() -> list[dict]:
         ORDER BY avg_playtime_hours DESC
         LIMIT 20
     """
-    return execute_query(sql)
+    return {"genre_playtime": execute_query(sql)}
 
 
 # ============ COMPARISON TOOLS ============
@@ -336,7 +336,7 @@ def analyze_reviews_vs_recommendations() -> dict:
         GROUP BY recommendation_tier
         ORDER BY avg_positive DESC
     """
-    return execute_query(sql)
+    return {"recommendation_tiers": execute_query(sql)}
 
 
 @mcp.tool
@@ -368,7 +368,7 @@ def get_publisher_satisfaction_ranking(min_games: int = 5, top_n: int = 20) -> l
         ORDER BY positive_ratio DESC, avg_positive DESC
         LIMIT %s
     """
-    return execute_query(sql, (min_games, top_n))
+    return {"publishers": execute_query(sql, (min_games, top_n))}
 
 
 @mcp.tool
@@ -396,7 +396,7 @@ def analyze_discount_patterns() -> dict:
         GROUP BY age_group
         ORDER BY avg_discount DESC
     """
-    return execute_query(sql)
+    return {"age_groups": execute_query(sql)}
 
 
 # ============ ADVANCED ANALYSIS TOOLS ============
@@ -440,7 +440,7 @@ def get_top_rated_games(
     """
     params.append(limit)
     
-    return execute_query(sql, tuple(params))
+    return {"games": execute_query(sql, tuple(params))}
 
 
 @mcp.tool
