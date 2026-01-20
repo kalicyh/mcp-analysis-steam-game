@@ -175,7 +175,7 @@ def get_price_statistics() -> dict:
 
 
 @mcp.tool
-def get_price_trend_by_year() -> list[dict]:
+def get_price_trend_by_year() -> dict:
     """
     Analyze how average game prices have changed over the years.
     
